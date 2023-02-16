@@ -94,6 +94,11 @@ class HomeActivity : AppCompatActivity(), CalendarView.OnDateClickListener,
             val day: Int = localDate.dayOfMonth
             val tempDate = "$day-$month-$year"
             selectDateTV.text = tempDate
+            for (elements in taskList) {
+                if (elements.date == tempDate) {
+                    taskEt.setText(elements.task)
+                }
+            }
         }
 
         submitBtn.setOnClickListener {
@@ -125,8 +130,13 @@ class HomeActivity : AppCompatActivity(), CalendarView.OnDateClickListener,
                 { view, year, monthOfYear, dayOfMonth ->
                     // on below line we are setting
                     // date to our text view.
-                    selectDateTV.text =
-                        (dayOfMonth.toString() + "-" + (monthOfYear + 1) + "-" + year)
+                    val dateText= (dayOfMonth.toString() + "-" + (monthOfYear + 1) + "-" + year)
+                    selectDateTV.text = dateText
+                    for (elements in taskList) {
+                        if (elements.date == dateText) {
+                            taskEt.setText(elements.task)
+                        }
+                    }
                 },
                 // on below line we are passing year, month
                 // and day for the selected date in our date picker.
