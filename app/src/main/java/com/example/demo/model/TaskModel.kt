@@ -6,7 +6,7 @@ import androidx.room.*
 data class TaskModel(
 
     @PrimaryKey(autoGenerate = true)
-    val taskModelId: Int,
+    val taskModelId: Long,
 
     val date: String? = null,
 

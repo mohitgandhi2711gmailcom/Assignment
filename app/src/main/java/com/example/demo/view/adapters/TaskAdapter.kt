@@ -3,7 +3,7 @@ package com.example.demo.view.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.demo.databinding.MovieLayoutBinding
+import com.example.demo.databinding.TaskItemBinding
 import com.example.demo.model.TaskModel
 
 class TaskAdapter : RecyclerView.Adapter<TaskAdapter.ViewHolder>() {
@@ -17,11 +17,11 @@ class TaskAdapter : RecyclerView.Adapter<TaskAdapter.ViewHolder>() {
         }
     }
 
-    class ViewHolder(val binding: MovieLayoutBinding) : RecyclerView.ViewHolder(binding.root)
+    class ViewHolder(val binding: TaskItemBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            MovieLayoutBinding.inflate(
+            TaskItemBinding.inflate(
                 LayoutInflater.from(
                     parent.context
                 )
@@ -30,7 +30,8 @@ class TaskAdapter : RecyclerView.Adapter<TaskAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.binding.movieName.text = taskList!![position].date
+        holder.binding.dateTv.text = taskList!![position].date
+        holder.binding.taskTv.text = taskList!![position].date
     }
 
     override fun getItemCount(): Int {

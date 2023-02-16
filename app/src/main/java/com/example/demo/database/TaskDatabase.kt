@@ -5,7 +5,7 @@ import androidx.room.*
 import com.example.demo.model.TaskModel
 
 @Database(
-    entities = [TaskModel::class, MovieResult::class], version = 1,
+    entities = [TaskModel::class], version = 1,
     exportSchema = true
 )
 

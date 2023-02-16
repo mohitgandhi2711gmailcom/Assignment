@@ -7,7 +7,7 @@
 
         <variable
             name="loginModel"
-            type="com.example.demo.viewmodel.MovieViewModel" />
+            type="com.example.demo.viewmodel.TaskViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,23 +17,50 @@
         tools:context="com.example.demo.view.HomeActivity">
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/action_btn"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
+            android:id="@+id/show_calender_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="@string/do_action"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintVertical_chainStyle="spread"
+            android:text="@string/show_calender"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/add_task_btn"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/add_task_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/add_task"
+            app:layout_constraintStart_toEndOf="@+id/show_calender_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <CalendarView
+            android:id="@+id/calender_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/show_calender_btn" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/task_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="@string/tasks"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/_20sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/calender_view" />
+
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_movies"
+            android:id="@+id/rv_tasks"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/_20sdp"
-            app:layout_constraintTop_toBottomOf="@+id/action_btn"
             app:layout_constraintBottom_toBottomOf="parent"
-            tools:listitem="@layout/movie_layout" />
+            app:layout_constraintTop_toBottomOf="@+id/task_title_tv"
+            tools:listitem="@layout/task_item" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

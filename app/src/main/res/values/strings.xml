@@ -6,6 +6,15 @@
     <string name="password_hint">Enter your password</string>
     <string name="button_text">Login</string>
     <string name="movie_name">Movie Name</string>
-    <string name="do_action">Do Action</string>
+    <string name="show_calender">Show Calender</string>
+    <string name="hide_calender">Hide Calender</string>
+    <string name="sample_date">Sample Date</string>
+    <string name="sample_task">Sample Task</string>
+    <string name="tasks">Tasks</string>
+    <string name="add_task">Add Task</string>
+    <string name="please_enter_task">Please Enter Task</string>
+    <string name="please_enter_a_task">Please Enter a Task</string>
+    <string name="please_select_date">Please Select Date</string>
+    <string name="submit">Submit</string>
 
 </resources>
