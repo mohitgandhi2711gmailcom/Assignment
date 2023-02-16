@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.mvvmdemo"
-        minSdk 23
+        minSdk 26
         targetSdk 33
         versionCode 1
         versionName "1.0"
@@ -127,4 +127,6 @@ dependencies {
     implementation 'androidx.room:room-ktx:2.5.0'
     implementation 'androidx.room:room-rxjava2:2.5.0'
     androidTestImplementation 'androidx.room:room-testing:2.5.0'
+
+    implementation 'com.github.mahendramahi:CalendarView:1.0'
 }

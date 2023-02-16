@@ -1,14 +1,17 @@
 package com.example.demo.view.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.demo.ItemClickListener
 import com.example.demo.databinding.TaskItemBinding
 import com.example.demo.model.TaskModel
 
-class TaskAdapter : RecyclerView.Adapter<TaskAdapter.ViewHolder>() {
+class TaskAdapter(context: Context) : RecyclerView.Adapter<TaskAdapter.ViewHolder>() {
 
     private var taskList: ArrayList<TaskModel>? = ArrayList()
+    private var itemClickListener: ItemClickListener = context as ItemClickListener
 
     fun setTaskList(taskList: List<TaskModel>?) {
         if (taskList != null) {
@@ -31,7 +34,10 @@ class TaskAdapter : RecyclerView.Adapter<TaskAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.dateTv.text = taskList!![position].date
-        holder.binding.taskTv.text = taskList!![position].date
+        holder.binding.taskTv.text = taskList!![position].task
+        holder.binding.closeImv.setOnClickListener {
+            itemClickListener.onItemClicked(taskList!![position])
+        }
     }
 
     override fun getItemCount(): Int {
