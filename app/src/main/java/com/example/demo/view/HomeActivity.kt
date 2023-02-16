@@ -54,6 +54,7 @@ class HomeActivity : AppCompatActivity(), CalendarView.OnDateClickListener,
 
     private fun doInitialSetup() {
         binding.calenderView.visibility = View.GONE
+        binding.calenderView.setIsOverflowDateVisible(true);
     }
 
 
@@ -130,7 +131,7 @@ class HomeActivity : AppCompatActivity(), CalendarView.OnDateClickListener,
                 { view, year, monthOfYear, dayOfMonth ->
                     // on below line we are setting
                     // date to our text view.
-                    val dateText= (dayOfMonth.toString() + "-" + (monthOfYear + 1) + "-" + year)
+                    val dateText = (dayOfMonth.toString() + "-" + (monthOfYear + 1) + "-" + year)
                     selectDateTV.text = dateText
                     for (elements in taskList) {
                         if (elements.date == dateText) {
@@ -172,6 +173,7 @@ class HomeActivity : AppCompatActivity(), CalendarView.OnDateClickListener,
                 taskList.clear()
                 taskList.addAll(movieList)
                 movieAdapter.setTaskList(movieList)
+                highlightTheCalender()
             }
     }
 
@@ -259,9 +261,8 @@ class HomeActivity : AppCompatActivity(), CalendarView.OnDateClickListener,
         val dataList = async.await()
         taskList.clear()
         taskList.addAll(dataList)
+        highlightTheCalender()
         movieAdapter.setTaskList(dataList)
-        /*val localDate = LocalDate.of(2000, 1, 1)
-        val date: Date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant())*/
     }
 
     override fun onItemClicked(taskModel: TaskModel) {
@@ -275,10 +276,18 @@ class HomeActivity : AppCompatActivity(), CalendarView.OnDateClickListener,
             TaskDatabase.getDatabase(this@HomeActivity).taskDao(),
             taskModel = taskModel
         )
+    }
 
-        /*DBHelper.updateTaskInList(
-            TaskDatabase.getDatabase(this@HomeActivity).taskDao(),
-            taskModel = taskModel
-        )*/
+    private fun highlightTheCalender() {
+        for (element in taskList) {
+            val month = if (element.month < 10) {
+                "0${element.month}"
+            } else {
+                element.month
+            }
+            val localDate = LocalDate.parse("${element.year}-$month-${element.day}")
+            val date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant())
+            binding.calenderView.setDateAsSelected(date)
+        }
     }
 }
