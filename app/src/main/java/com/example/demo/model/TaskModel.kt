@@ -1,16 +1,15 @@
 package com.example.demo.model
 
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "task")
+@Entity(tableName = "task", indices = [Index(value = ["date"], unique = true)])
 data class TaskModel(
-
-    @PrimaryKey(autoGenerate = true)
-    val taskModelId: Long,
-    val date: String? = null,
-    val day: Int? = null,
-    val month: Int? = null,
-    val year: Int? = null,
-    val task: String? = null,
+    @PrimaryKey
+    val date: String,
+    val day: Int,
+    val month: Int,
+    val year: Int,
+    val task: String,
 )

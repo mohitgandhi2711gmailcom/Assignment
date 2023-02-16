@@ -26,6 +26,7 @@ import io.mahendra.calendarview.widget.CalendarView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import org.joda.time.DateTimeComparator
 import java.time.LocalDate
 import java.time.ZoneId
 import java.util.*
@@ -38,6 +39,7 @@ class HomeActivity : AppCompatActivity(), CalendarView.OnDateClickListener,
     private val viewModel: TaskViewModel by viewModels()
     private lateinit var movieAdapter: TaskAdapter
     private var selectedMonth: Int = 0
+    private val taskList = ArrayList<TaskModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -157,6 +159,8 @@ class HomeActivity : AppCompatActivity(), CalendarView.OnDateClickListener,
     private fun observeChangesInDB() {
         DBHelper.getTaskLiveList(TaskDatabase.getDatabase(this@HomeActivity).taskDao())
             .observe(this) { movieList ->
+                taskList.clear()
+                taskList.addAll(movieList)
                 movieAdapter.setTaskList(movieList)
             }
     }
@@ -164,13 +168,23 @@ class HomeActivity : AppCompatActivity(), CalendarView.OnDateClickListener,
     private fun saveDataInDB(taskData: String, dateData: String) {
         val split = dateData.split("-")
         val taskModel = TaskModel(
-            Calendar.getInstance().timeInMillis,
-            taskData,
+            dateData,
             split[0].toInt(),
             split[1].toInt(),
             split[2].toInt(),
-            dateData
+            taskData
         )
+
+        /*if (alreadyDataInDB(dateData)) {
+            lifecycleScope.launch(
+                Dispatchers.IO
+            ) {
+                DBHelper.updateTaskInList(
+                    TaskDatabase.getDatabase(this@HomeActivity).taskDao(),
+                    taskModel
+                )
+            }
+        } else {*/
         lifecycleScope.launch(
             Dispatchers.IO
         ) {
@@ -179,10 +193,43 @@ class HomeActivity : AppCompatActivity(), CalendarView.OnDateClickListener,
                 taskModel
             )
         }
+        /* }*/
+    }
+
+    private fun alreadyDataInDB(dateData: String): Boolean {
+        for (element in taskList) {
+            if (element.date == dateData) {
+                return true
+            }
+        }
+        return false
+    }
+
+    private suspend fun getAllDataFromDB(): List<TaskModel> {
+        val async = lifecycleScope.async(Dispatchers.IO) {
+            DBHelper.getMonthFilerTaskList(
+                TaskDatabase.getDatabase(this@HomeActivity).taskDao(),
+                selectedMonth
+            )
+        }
+        return async.await()
     }
 
     override fun onDateClick(selectedDate: Date) {
-        showAlertPopup(selectedDate)
+        val currentDate = Date()
+        val dateOnlyInstance = DateTimeComparator.getDateOnlyInstance()
+        val compare = dateOnlyInstance.compare(currentDate, selectedDate)
+        when {
+            compare > 0 -> {
+                Toast.makeText(this, "Please select Future Dates", Toast.LENGTH_LONG).show()
+            }
+            compare < 0 -> {
+                showAlertPopup(selectedDate)
+            }
+            else -> {
+                showAlertPopup(selectedDate)
+            }
+        }
     }
 
     override fun onMonthChanged(monthDate: Date) {
@@ -194,10 +241,15 @@ class HomeActivity : AppCompatActivity(), CalendarView.OnDateClickListener,
 
     private suspend fun updateList() {
         val async = lifecycleScope.async(Dispatchers.IO) {
-            DBHelper.getMonthFilerTaskList(TaskDatabase.getDatabase(this@HomeActivity).taskDao(), selectedMonth)
+            DBHelper.getMonthFilerTaskList(
+                TaskDatabase.getDatabase(this@HomeActivity).taskDao(),
+                selectedMonth
+            )
         }
-        val await = async.await()
-        movieAdapter.setTaskList(await)
+        val dataList = async.await()
+        taskList.clear()
+        taskList.addAll(dataList)
+        movieAdapter.setTaskList(dataList)
         /*val localDate = LocalDate.of(2000, 1, 1)
         val date: Date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant())*/
     }
