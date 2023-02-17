@@ -5,26 +5,26 @@
     android:layout_width="match_parent"
     android:layout_height="100dp"
     android:layout_margin="10dp"
-    android:background="@android:color/white"
-    android:padding="10dp">
+    android:background="@android:color/white">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/date_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/sample_date"
+        android:padding="@dimen/_10sdp"
         android:textColor="@android:color/black"
         app:layout_constraintBottom_toTopOf="@+id/task_tv"
         app:layout_constraintEnd_toStartOf="@+id/close_imv"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/task_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/sample_task"
+        android:padding="@dimen/_10sdp"
         android:textColor="@android:color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/close_imv"
@@ -41,5 +41,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:background="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

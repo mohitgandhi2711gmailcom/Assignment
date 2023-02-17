@@ -4,7 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.demo.ItemClickListener
+import com.example.demo.listeners.ItemClickListener
 import com.example.demo.databinding.TaskItemBinding
 import com.example.demo.model.TaskModel
 

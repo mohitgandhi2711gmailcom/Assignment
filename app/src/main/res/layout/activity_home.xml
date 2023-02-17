@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools">-->
 
-    <data>
+    <!--<data>
 
         <variable
             name="loginModel"
             type="com.example.demo.viewmodel.TaskViewModel" />
-    </data>
+    </data>-->
 
     <androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#DCDCDC"
@@ -40,32 +43,16 @@
         <com.github.sundeepk.compactcalendarview.CompactCalendarView
             android:id="@+id/calender_view"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_250sdp"
+            android:layout_height="@dimen/_180sdp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            app:compactCalendarBackgroundColor="@android:color/darker_gray"
+            app:compactCalendarCurrentDayBackgroundColor="#B71C1C"
+            app:compactCalendarMultiEventIndicatorColor="@android:color/holo_orange_dark"
+            app:compactCalendarTargetHeight="250dp"
+            app:compactCalendarTextColor="@android:color/holo_blue_bright"
+            app:compactCalendarTextSize="@dimen/_15ssp"
             app:layout_constraintTop_toBottomOf="@+id/add_task_btn" />
-
-        <!--<io.mahendra.calendarview.widget.CalendarView
-            android:id="@+id/calender_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/add_task_btn"
-            android:background="@android:color/transparent"
-            app:calendarBackgroundColor="@android:color/transparent"
-            app:calendarTitleTextColor="@android:color/white"
-            app:currentDayOfMonthColor="@android:color/white"
-            app:dayOfWeekTextColor="@android:color/white"
-            app:disabledDayBackgroundColor="@android:color/transparent"
-            app:disabledDayTextColor="@android:color/holo_green_dark"
-            app:selectedDayBackgroundColor="@color/colorAccent"
-            app:titleLayoutBackgroundColor="@android:color/transparent"
-            app:weekLayoutBackgroundColor="@android:color/transparent"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="8dp"/>-->
-
-        <!--<FrameLayout
-            android:id="@+id/frame_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/add_task_btn" />-->
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/task_title_tv"
@@ -90,4 +77,5 @@
             tools:listitem="@layout/task_item" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+<!--
+</layout>-->

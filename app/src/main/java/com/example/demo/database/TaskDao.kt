@@ -3,7 +3,6 @@ package com.example.demo.database
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.demo.model.TaskModel
-import java.time.Month
 
 @Dao
 interface TaskDao {
@@ -17,12 +16,12 @@ interface TaskDao {
     @Delete
     fun delete(taskDate: TaskModel)
 
-    @Query("SELECT * FROM task")
+    @Query("SELECT * FROM task ORDER BY day ASC")
     fun getAllTaskListLive(): LiveData<List<TaskModel>>
 
-    @Query("SELECT * FROM task")
+    @Query("SELECT * FROM task ORDER BY day ASC")
     fun getAllTaskList(): List<TaskModel>
 
-    @Query("SELECT * FROM task WHERE month LIKE :month")
+    @Query("SELECT * FROM task WHERE month LIKE :month ORDER BY day ASC")
     fun getMonthFilterTaskList(month: Int): List<TaskModel>
 }

@@ -13,6 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/please_enter_task"
+        android:textSize="@dimen/_15ssp"
         android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,18 +25,21 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_20sdp"
         android:hint="@string/please_enter_a_task"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:textColorHint="@android:color/black"
         android:textColor="@android:color/black"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/please_enter_task_tv"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/select_date_btn"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_20sdp"
         android:text="@string/please_select_date"
         android:textColor="@android:color/black"
-        android:textSize="@dimen/_20sdp"
+        android:textSize="@dimen/_12ssp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/task_et" />
@@ -45,9 +49,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_20sdp"
-        android:text="@string/sample_date"
         android:textColor="@android:color/black"
-        android:textSize="@dimen/_20sdp"
+        android:textSize="@dimen/_18ssp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/select_date_btn" />
@@ -59,7 +62,7 @@
         android:layout_marginTop="@dimen/_20sdp"
         android:text="@string/submit"
         android:textColor="@android:color/black"
-        android:textSize="@dimen/_20sdp"
+        android:textSize="@dimen/_20ssp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/date_selected_tv" />

@@ -1,7 +1,9 @@
 package com.example.demo.database
 
 import android.content.Context
-import androidx.room.*
+import androidx.room.Database
+import androidx.room.Room
+import androidx.room.RoomDatabase
 import com.example.demo.model.TaskModel
 
 @Database(
@@ -15,16 +17,9 @@ abstract class TaskDatabase : RoomDatabase() {
 
     companion object {
 
-        /**
-         * Singleton prevents multiple instances of database opening at the same time.
-         * */
-        @Volatile
         private var INSTANCE: TaskDatabase? = null
 
         fun getDatabase(context: Context): TaskDatabase {
-            /**
-             * If the INSTANCE is not null, Then return it, If it is, Then create the database
-             * */
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
@@ -32,7 +27,6 @@ abstract class TaskDatabase : RoomDatabase() {
                     "task.db"
                 ).build()
                 INSTANCE = instance
-                // return instance
                 instance
             }
         }
