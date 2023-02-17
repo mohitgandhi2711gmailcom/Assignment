@@ -22,7 +22,6 @@ import com.example.demo.helper.DBHelper
 import com.example.demo.model.TaskModel
 import com.example.demo.view.adapters.TaskAdapter
 import com.example.demo.viewmodel.TaskViewModel
-import io.mahendra.calendarview.widget.CalendarView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -32,8 +31,7 @@ import java.time.ZoneId
 import java.util.*
 
 
-class HomeActivity : AppCompatActivity(), CalendarView.OnDateClickListener,
-    CalendarView.OnMonthChangedListener, ItemClickListener {
+class HomeActivity : AppCompatActivity(), ItemClickListener {
 
     private lateinit var binding: ActivityHomeBinding
     private val viewModel: TaskViewModel by viewModels()
@@ -54,7 +52,6 @@ class HomeActivity : AppCompatActivity(), CalendarView.OnDateClickListener,
 
     private fun doInitialSetup() {
         binding.calenderView.visibility = View.GONE
-        binding.calenderView.setIsOverflowDateVisible(true);
     }
 
 
@@ -73,8 +70,8 @@ class HomeActivity : AppCompatActivity(), CalendarView.OnDateClickListener,
             showAlertPopup(null)
         }
 
-        binding.calenderView.setOnDateClickListener(this)
-        binding.calenderView.setOnMonthChangedListener(this)
+//        binding.calenderView.setOnDateClickListener(this)
+//        binding.calenderView.setOnMonthChangedListener(this)
     }
 
     private fun showAlertPopup(date: Date?) {
@@ -227,7 +224,7 @@ class HomeActivity : AppCompatActivity(), CalendarView.OnDateClickListener,
         return async.await()
     }
 
-    override fun onDateClick(selectedDate: Date) {
+    fun onDateClick(selectedDate: Date) {
         val currentDate = Date()
         val dateOnlyInstance = DateTimeComparator.getDateOnlyInstance()
         val compare = dateOnlyInstance.compare(currentDate, selectedDate)
@@ -244,7 +241,7 @@ class HomeActivity : AppCompatActivity(), CalendarView.OnDateClickListener,
         }
     }
 
-    override fun onMonthChanged(monthDate: Date) {
+    fun onMonthChanged(monthDate: Date) {
         val localDate: LocalDate =
             monthDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
         selectedMonth = localDate.monthValue
@@ -287,7 +284,7 @@ class HomeActivity : AppCompatActivity(), CalendarView.OnDateClickListener,
             }
             val localDate = LocalDate.parse("${element.year}-$month-${element.day}")
             val date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant())
-            binding.calenderView.setDateAsSelected(date)
+//            binding.calenderView.setDateAsSelected(date)
         }
     }
 }

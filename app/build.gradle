@@ -128,6 +128,10 @@ dependencies {
     implementation 'androidx.room:room-rxjava2:2.5.0'
     androidTestImplementation 'androidx.room:room-testing:2.5.0'
 
-    implementation 'com.github.mahendramahi:CalendarView:1.0'
+//    implementation 'com.github.mahendramahi:CalendarView:1.0'
+//    implementation 'com.joybar.calendar:librarycalendar:1.0.6'
+    implementation 'com.github.sundeepk:compact-calendar-view:3.0.0'
     implementation 'joda-time:joda-time:2.9.9'
+    implementation 'com.intuit.ssp:ssp-android:1.0.5'
+    implementation 'com.intuit.sdp:sdp-android:1.0.5'
 }
